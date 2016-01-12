@@ -1,0 +1,95 @@
+DEFINICIÓN:
+	En este paso explicaremos como crear un componente en react
+
+PASO 1:index.html
+-----------------
+	Pasos a seguir:
+		Crearemos un archivo index.html dentro del proyecto con el siguiente contenido:
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<title>React js</title>
+		</head>
+		<body>
+			<div id="container"></div>
+
+			<script src="build.js"></script>
+		</body>
+		</html>
+	Explicacion:
+		1) <div id="container"></div> 
+			En este div insertaremos posteriormente el componente elabrodo con react
+		2)	<script src="build.js"></script>
+			En build js estara todo nuestro js (react, componentes) que con browserify lograremos eso (revisar "Preparación de un proyecto react")
+PASO 2: app.js
+--------------
+	Pasos a seguir:
+		Creamos un archivo app.js a la altura de index.js con el siguiente contenido:
+		import React from 'react'
+		import PokeTable from './componentes/PokeTable'
+		var pokemons =[
+					{ number:1,name:'Bulbasaur'},
+					{ number:2,name:'Ivysaur'},
+					{ number:3,name:'Venasaur'}
+				];
+		React.render(<PokeTable pokemons={pokemons}/>,document.getElementById('container'));
+	Expliación:
+		- app.js sera nuestro archivo principal, asi como el index.php lo es para php
+		- app.js es un archivo que no puede ser interpretado por el navegador, ya que ahi tenemos códgo en babel(ecma scrpit 6) que los navegadores no lo soportan, pero sin embargo este sera el archivo al que nosotros le daremos mantenimiento
+		- lo que hay en app.js terminara finalmente en build.js (al ser traspilado por babelify)
+PASO 3: PokeTable.js,PokeRow.js, PokeAvatar.js
+----------------------------------------------
+	Pasos a seguir:
+		Dentro del proyecto creamos una carpeta llamada "componentes" y dentro de ella crearemos 3 archivos con los siguientes contenidos:
+		1) 
+			nombre del archivo: Poketable.js
+			contenido:
+				import React from 'react'
+				import PokeRow from './PokeRow'
+				class PokeTable extends React.Component{
+					render()
+					{
+						return <ul className="poketable">
+									{
+										this.props.pokemons.map((pokemon)=>
+										{
+											return <PokeRow key={pokemon.number} name={pokemon.name} number={pokemon.number} />
+										})
+									}
+								</ul>
+					}
+				}
+				export default PokeTable
+		2) 
+			nombre del archivo: PokeRow.js
+			contenido:
+			import React from 'react'
+			import PokeAvatar from './PokeAvatar'
+			class PokeRow extends React.Component{
+				render()
+				{
+					
+					return 	<li className="porkerow">
+								<PokeAvatar number={this.props.number} />
+								{this.props.name}
+							</li>
+				}
+			}
+			export default PokeRow
+		3) 
+			nombre del archivo: PokeAvatar.js
+			contenido:
+			import React from 'react'
+			class PokeAvatar extends React.Component{
+				render()
+				{
+					var url=`http://veekun.com/dex/media/pokemon/main-sprites/x-y/${this.props.number}.png`;
+					return <img src={url} className="avatar"/>
+				}
+			}
+			export default PokeAvatar
+
+Paso 4: Concatenar con Browserify
+---------------------------------
+	Comando:
+		npm run build

@@ -1,0 +1,52 @@
+PREREQUISITOS:
+--------------
+	-	Instalar nodejs y npm
+
+PASO 1: Creando el Package.json
+--------------------------------
+	Comando:
+		npm init
+	Explicación:
+		Esto creara el package.json en donde se guardara el nombre de las dependencioas que usaremos en el proyecto(se debe ejecutar este comando cuando estes ubicado en la carpeta de tu proyecto a traves de la consola)
+
+PASO 2: Instalando Dependencias a Usar
+---------------------------------------
+	comandos:
+		npm install --save react
+		npm instal --save browserify
+		npm install --save babelify
+	Explicación:
+		Con estos comandos descargaremos 3 paquetes que usaremos en el proyecto, los cuales son react,browserity, babelify-
+		- react: Libreria de facebook para maquetar con javascript
+		- browserify: Automatizador de tareas que me permitira concatenar archivos
+		- bablify: Me permitira usar la sintaxis del javascript del futuro (ecma scrpit 6)
+
+PASO 3: Agregar el Script de Ejecución al pacKage.josn
+------------------------------------------------------
+	Pasos a seguir:
+		En el archivo package.json agrega la siguiente linea:
+		"scripts":
+		{
+	  		"build":"browserify app.js > build.js -t babelify"
+	  	}
+	  	En otras palabras tu package.json quedara algo como:
+	  	{
+		  "name": "mi-blog",
+		  "dependencies": {
+		    "babelify": "^7.2.0",
+		    "browserify": "^13.0.0",
+		    "react": "^0.14.6"
+		  },
+		  "scripts": {
+		    "build": "browserify app.js > build.js -t babelify"
+		  }
+		}
+	Explicación:
+		La linea "build":"browserify app.js > build.js -t babelify", lo que hace es que al ejecutar un comando(que se lo explicare en el paso4) trae los archivos de app.js y los coloca en build.js. Si app.js tiene import de otras js, a esos archivos tambien los concatenara dentro de build.js
+
+PASO 4:Ejecutar Browserify
+--------------------------
+	Comando:
+		npm run build
+	Explicación:
+		Este comando hace que se ejecute la lina de "sripts" dentro del package.json

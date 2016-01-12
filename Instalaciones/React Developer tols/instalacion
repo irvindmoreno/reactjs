@@ -1,0 +1,9 @@
+DEFENICION:
+-----------
+Asi como el inspector de lemenotos te muestra el html, este react developer tolls te mostrara los componentes de react
+INSTALACIÓN:
+-----------D
+1)	Agregar la extensión a chrome del siguiente link:
+	https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi
+2)	Ir a las opciones de crhome de la bara superior derecha > Mas Herramientas > Extension
+3)	Buscar en la lista de extensiones a react developers tools y darle check a "Permitir 		acceso a las URL del archivo"D
